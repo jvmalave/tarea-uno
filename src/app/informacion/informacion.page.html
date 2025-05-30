@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="favortire">
+    <ion-icon slot="start" name="person" size="large" class="ion-padding"></ion-icon>
+    <ion-title>Información</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding">
+  <div class="profile-container">
+    <ion-card class="avatar">
+      <img src="./assets/img/josef-2.jpg" alt="Avatar del usuario">
+    </ion-card>
+
+    <h2>{{ nombreUsuario }}</h2>
+    <ion-list>
+      <ion-item>
+        <ion-icon slot="start" name="mail" size="large" color="favorite"></ion-icon>
+        
+        <ion-text>{{ correoUsuario }}</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" name="call" size="large" color="favorite"></ion-icon>
+        
+        <ion-text>{{ telefonoUsuario }}</ion-text>
+      </ion-item>
+    </ion-list>
+
+    <ion-card class="descripcion">
+      <ion-card-header>
+        <ion-card-title>Sobre mí</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ descripcionUsuario }}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+

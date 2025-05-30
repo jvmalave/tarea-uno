@@ -1,20 +1,38 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+  <ion-toolbar color="favorite">
+    <ion-icon slot="start" name="home" size="large" class="ion-padding"></ion-icon>
+    <ion-title>Inicio</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="container">
+    <ion-card class="image-card">
+      <ion-img src="./assets/img/intro.png" alt="UNETI"></ion-img>
+    </ion-card>
+  
+    <ion-card class="uneti-card">
+      <ion-card-content>
+        <h2>Universidad Nacional Experimental de las Telecomunicaciones e Informática</h2>
+      </ion-card-content>
+    </ion-card>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <ion-card class="activity-card">
+      <ion-card-content>
+        <p><strong>Evaluativa #1</strong><br><strong>
+        Crear una aplicación con Ionic</strong></p>
+        <p>Esta evaluación se centra en el desarrollo de aplicaciones móviles híbridas 
+          mediante el framework IONIC, fundamentándose en el análisis y la innovación de 
+          los procesos de desarrollo de soluciones informáticas.
+</p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="developer-card">
+      <ion-card-content>
+        <p>Desarrollado por:<br>
+        <strong>José Francisco Malavé</strong></p>
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>

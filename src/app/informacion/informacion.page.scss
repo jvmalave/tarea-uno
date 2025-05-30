@@ -1,0 +1,55 @@
+
+ion-toolbar{
+  background-color: var(--ion-color-favorite);
+}
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  text-align:center;
+  padding-top: 0,5rem;
+  padding-inline: 0,5rem;
+}
+
+ion-text ion-label{
+  font-size: 1rem;
+}
+
+.avatar {
+  img {
+    width: 55vw;
+    height: auto;
+  }
+  margin-bottom: 0.4rem;
+  
+}
+
+.descripcion {
+  background-color: var(--ion-color-favorite);
+  color: var(--ion-color-favorite-constrat);
+  margin-top: 2rem;
+  width: 100%;
+}
+
+/* Media queries para adaptar el diseño */
+@media (max-width: 576px) {
+  img {
+    width: 55vw;
+    height: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  img {
+    width: 10vw;
+    height: auto;
+  }
+}
+
+@media (min-width: 1200px) {
+  img {
+    width: 10vw;
+    height: auto;
+  }
+}

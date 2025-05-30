@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar color="favorite">
+    <ion-title>{{ nombre }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()"><ion-icon slot="end" name="close"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <p [innerHTML]="respuesta"></p>
+</ion-content>
+

@@ -35,3 +35,42 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+
+ion-tab-bar {
+  --background: var(--ion-color-dark);
+  height: 70px;
+  border-top: 1px solid var(--ion-color-light-shade);
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+}
+
+ion-tab-button {
+  --color: var(--ion-color-favorite-secondary);
+  --color-selected: var(--ion-color-primary);
+  font-size: 0.8rem;
+}
+
+.tab-active {
+  --color: var(--ion-color-ligth);
+  ion-icon, ion-label {
+    color: var(--ion-color-ligth);
+  }
+}
+
+ion-tab-button .tab-selected {
+  ion-icon {
+    animation: pulse 0.4s ease;
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+
+ion-content {
+  --padding-bottom: 70px;
+}
+

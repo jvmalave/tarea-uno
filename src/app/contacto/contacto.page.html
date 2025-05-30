@@ -1,0 +1,55 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="favorite">
+    <ion-icon slot="start" name="chatbubbles" size="large" class="ion-padding"></ion-icon>
+    <ion-title>contacto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>¿Sobre qué tema necesitas información?</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let topico of topicos" (click)="mostrarRespuestaTopico(topico.nombre, topico.respuesta)">
+          <ion-icon slot="start" name="{{ topico.icon }}"></ion-icon>
+          <ion-label>{{ topico.nombre }}</ion-label>
+          <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  
+  <form [formGroup]="contactoForm" (ngSubmit)="enviarFormulario()">
+    <h5 class="ion-margin-top">Escribeme un mensaje....</h5>
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Nombre</ion-label>
+        <ion-input formControlName="nombre"></ion-input>
+      </ion-item>
+      <ion-note color="danger" *ngIf="contactoForm.get('nombre')?.invalid && (contactoForm.get('nombre')?.dirty || contactoForm.get('nombre')?.touched)">
+        El nombre es requerido.
+      </ion-note>
+
+      <ion-item>
+        <ion-label position="stacked">Email</ion-label>
+        <ion-input formControlName="email" type="email"></ion-input>
+      </ion-item>
+      <ion-note color="danger" *ngIf="contactoForm.get('email')?.invalid && (contactoForm.get('email')?.dirty || contactoForm.get('email')?.touched)">
+        Por favor, introduce un email válido.
+      </ion-note>
+
+      <ion-item>
+        <ion-label position="stacked">Mensaje</ion-label>
+        <ion-textarea formControlName="mensaje"></ion-textarea>
+      </ion-item>
+      <ion-note color="danger" *ngIf="contactoForm.get('mensaje')?.invalid && (contactoForm.get('mensaje')?.dirty || contactoForm.get('mensaje')?.touched)">
+        El mensaje es requerido.
+      </ion-note>
+    </ion-list>
+
+    <ion-button type="submit" expand="block" shape="round" [disabled]="contactoForm.invalid" color="favorite">Enviar</ion-button>
+  </form>
+
+</ion-content>
