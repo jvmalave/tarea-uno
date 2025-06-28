@@ -20,36 +20,62 @@
       </ion-list>
     </ion-card-content>
   </ion-card>
-  
+<div class="container">
+  <div>
+    <h4>¿Desea realizar una solicitud?</h4>
+    <p>Por favor rellena el siguiente formulario</p>
+  </div>
   <form [formGroup]="contactoForm" (ngSubmit)="enviarFormulario()">
-    <h5 class="ion-margin-top">Escribeme un mensaje....</h5>
-    <ion-list>
-      <ion-item>
-        <ion-label position="stacked">Nombre</ion-label>
-        <ion-input formControlName="nombre"></ion-input>
-      </ion-item>
-      <ion-note color="danger" *ngIf="contactoForm.get('nombre')?.invalid && (contactoForm.get('nombre')?.dirty || contactoForm.get('nombre')?.touched)">
-        El nombre es requerido.
-      </ion-note>
+    <ion-item>
+      <ion-label position="stacked" class="label">Nombre <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input formControlName="nombre"></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="contactoForm.get('nombre')?.invalid && (contactoForm.get('nombre')?.dirty || contactoForm.get('nombre')?.touched)">
+      El nombre es requerido y debe tener al menos 3 caracteres.
+    </ion-note>
 
-      <ion-item>
-        <ion-label position="stacked">Email</ion-label>
-        <ion-input formControlName="email" type="email"></ion-input>
-      </ion-item>
-      <ion-note color="danger" *ngIf="contactoForm.get('email')?.invalid && (contactoForm.get('email')?.dirty || contactoForm.get('email')?.touched)">
-        Por favor, introduce un email válido.
-      </ion-note>
+    <ion-item>
+      <ion-label position="stacked" class="label">Email <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input type="email" formControlName="email"></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="contactoForm.get('email')?.invalid && (contactoForm.get('email')?.dirty || contactoForm.get('email')?.touched)">
+      Por favor, introduce un email válido.
+    </ion-note>
 
-      <ion-item>
-        <ion-label position="stacked">Mensaje</ion-label>
-        <ion-textarea formControlName="mensaje"></ion-textarea>
-      </ion-item>
-      <ion-note color="danger" *ngIf="contactoForm.get('mensaje')?.invalid && (contactoForm.get('mensaje')?.dirty || contactoForm.get('mensaje')?.touched)">
-        El mensaje es requerido.
+    <ion-item>
+      <ion-label position="stacked" class="label">Teléfono <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input type="tel" formControlName="telefono"></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="contactoForm.get('telefono')?.invalid && (contactoForm.get('telefono')?.dirty || contactoForm.get('telefono')?.touched)">
+      El teléfono debe contener entre 7 y 15 dígitos.
+    </ion-note>
+    <ion-item>
+      <ion-label  class="ion-padding-top">Servicios a solicitar: <ion-text color="danger">*</ion-text></ion-label>
+      <ion-note color="danger" *ngIf="contactoForm.get('serviciosSolicitados')?.invalid && (contactoForm.get('serviciosSolicitados')?.dirty || contactoForm.get('serviciosSolicitados')?.touched)">
+        Debes seleccionar al menos un servicio.
       </ion-note>
-    </ion-list>
+  
+      <ion-list>
+        <ion-item *ngFor="let servicio of servicios">
+          <ion-checkbox slot="start" [value]="servicio" (ionChange)="onCheckboxChange($event)"></ion-checkbox>
+          <ion-label>{{ servicio }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-item>
 
-    <ion-button type="submit" expand="block" shape="round" [disabled]="contactoForm.invalid" color="favorite">Enviar</ion-button>
+    <ion-item>
+      <ion-label position="stacked" class="label">Dame detalles de tu solicitud <ion-text color="danger">*</ion-text></ion-label>
+      <ion-textarea formControlName="mensaje" rows="4"></ion-textarea>
+    </ion-item>
+    <ion-note color="danger" *ngIf="contactoForm.get('mensaje')?.invalid && (contactoForm.get('mensaje')?.dirty || contactoForm.get('mensaje')?.touched)">
+      El mensaje es requerido y debe tener al menos 10 caracteres.
+    </ion-note>
+
+    <ion-button type="submit" expand="block" shape="round" [disabled]="contactoForm.invalid" color="primary" class="ion-margin-top">
+    Enviar solicitud
+  </ion-button>
+
   </form>
+</div>
 
 </ion-content>

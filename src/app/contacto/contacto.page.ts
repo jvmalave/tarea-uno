@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray, FormControl  } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { InfoModalComponent } from '../info-modal/info-modal.component';
+import { ToastController } from '@ionic/angular';
+
 
 @Component({
   standalone:false,
@@ -10,8 +12,20 @@ import { InfoModalComponent } from '../info-modal/info-modal.component';
   styleUrls: ['./contacto.page.scss'],
 })
 export class ContactoPage implements OnInit {
+
   contactoForm!: FormGroup;
-  topicos = [
+  servicios = [
+    'Desarrollo y mantenimiento de aplicaciones móviles multiplataforma',
+    'Integración con APIs y servicios externos',
+    'Diseño de interfaces modernas y adaptativas',
+    'Gestión de usuarios y seguridad',
+    'Sincronización y almacenamiento de datos',
+    'Notificaciones push y geolocalización',
+    'Soporte técnico y actualizaciones continuas',
+    'Publicación en tiendas de aplicaciones',
+    'Consultoría y asesoría técnica'
+  ];
+ topicos = [
     { id: 1, 
       nombre: 'Soporte', 
       icon:'cog' ,
@@ -77,18 +91,22 @@ export class ContactoPage implements OnInit {
 
   
   constructor(
-    private formBuilder: FormBuilder,
-    private modalCtrl: ModalController
-  ) {}
-
-
-  ngOnInit() {
-    this.contactoForm = this.formBuilder.group({
-      nombre: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      mensaje: ['', Validators.required]
+    private fb: FormBuilder,
+    private modalCtrl: ModalController,
+    private toast: ToastController
+    ){
+      this.contactoForm = this.fb.group({
+        nombre: ['', [Validators.required, Validators.minLength(3)]],
+        email: ['', [Validators.required, Validators.email]],
+        telefono: ['', [Validators.pattern('^0[0-9]{10}$')]],  
+        serviciosSolicitados: this.fb.array([], Validators.required), 
+        mensaje: ['', [Validators.required, Validators.minLength(10)]],
     });
   }
+
+
+
+  ngOnInit() {}
 
   async mostrarRespuestaTopico(nombre: string, respuesta: string) {
     const modal = await this.modalCtrl.create({
@@ -101,13 +119,46 @@ export class ContactoPage implements OnInit {
     await modal.present();
   }
 
-  enviarFormulario() {
-    if (this.contactoForm.valid) {
-      // Aquí puedes enviar los datos a tu backend o mostrarlos en consola
-      console.log(this.contactoForm.value);
-      alert('Tu mesanje se ha enviado con exito');
+  get serviciosSolicitados(): FormArray {
+    return this.contactoForm.get('serviciosSolicitados') as FormArray;
+  }
+  // Método para manejar selección/deselección de servicios
+  onCheckboxChange(event: any) {
+    const serviciosArray: FormArray = this.serviciosSolicitados;
 
-    this.contactoForm.reset();
+    if (event.detail.checked) {
+      serviciosArray.push(new FormControl(event.detail.value));
+    } else {
+      const index = serviciosArray.controls.findIndex(x => x.value === event.detail.value);
+      if (index !== -1) {
+        serviciosArray.removeAt(index);
+      }
     }
   }
+
+  async enviarFormulario() {
+    if (this.contactoForm.valid) {
+      console.log('Datos del formulario:', this.contactoForm.value);
+      this.contactoForm.reset();
+      this.serviciosSolicitados.clear();
+      await this.mostrarToast('¡Gracias por enviarnos tu solicitud, la he recibido y la estoy analizado para brindarte una excelente solución.');
+    } else {
+      this.contactoForm.markAllAsTouched();
+    }
+  }
+
+  async mostrarToast(mensaje: string) {
+    const toast = await this.toast.create({
+      message: mensaje,
+      duration: 5000, // duración en ms
+      position: 'middle',
+      cssClass: 'mi-toast-favorito',
+      icon: 'checkmark-circle-outline'
+    });
+    toast.present();
+  }
+
+
+
 }
+

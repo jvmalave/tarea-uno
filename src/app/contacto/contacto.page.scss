@@ -2,9 +2,57 @@ ion-toolbar {
   background-color: var(--ion-color-favorite);
 }
 
+.container{
+  margin-top: 50px;
+  margin: 50px, 15px 15px 15px;
+  border: solid 1px rgb(228, 226, 226);
+  border-radius: 15px;
+  background-color: var(--ion-color-favorite);
+  h4, p {
+    text-align: center;
+  }
+}
+
+.label{
+  font-size: 20px;
+}
+
+ion-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ion-text-color);
+}
+
+ion-input, ion-textarea {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--ion-text-color);
+}
+
+ion-checkbox + ion-label {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--ion-text-color);
+}
+
+/* Opcional: para el texto dentro del checkbox (cuando tiene texto) */
+ion-checkbox {
+  --size: 16px; 
+}
+
+/* Ajuste específico para ion-textarea */
+ion-textarea {
+  min-height: 80px; /* Para mejor usabilidad */
+}
+
+
 ion-button {
   background: var(--ion-color-favorite);
   color: var(--ion-color-favorite-contrast);
   border-radius: 30px;
   margin-top: 1rem;
+}
+
+.mi-toast-favorito{
+  --background: var(--ion-color-favorite-secondary) important!;
 }
